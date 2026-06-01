@@ -189,3 +189,46 @@ export const getDaysColor = (days) => {
   if (days <= 60) return 'text-warning font-semibold'
   return 'text-safe'
 }
+
+/**
+ * Returns the total annual spend across all contracts.
+ * @param {Array} contractList - Array of contract objects
+ * @returns {number} Total spend in USD
+ */
+export const getTotalSpend = (contractList) => {
+  return contractList.reduce((sum, c) => sum + (c.annualSpend || 0), 0)
+}
+
+/**
+ * Returns contracts filtered by status.
+ * @param {Array} contractList - Array of contract objects
+ * @param {'Act Now'|'Coming Up'|'Safe'} status - Status to filter by
+ * @returns {Array} Filtered contracts
+ */
+export const getContractsByStatus = (contractList, status) => {
+  return contractList.filter((c) => c.status === status)
+}
+
+/**
+ * Returns the number of days until the contract deadline from today.
+ * @param {string} deadlineDate - ISO date string (e.g. '2025-03-01')
+ * @returns {number} Days remaining (negative if past)
+ */
+export const calcDaysRemaining = (deadlineDate) => {
+  const today = new Date()
+  const deadline = new Date(deadlineDate)
+  const diff = deadline - today
+  return Math.ceil(diff / (1000 * 60 * 60 * 24))
+}
+
+/**
+ * Returns a human-readable urgency label based on days remaining.
+ * @param {number} days
+ * @returns {string}
+ */
+export const getUrgencyLabel = (days) => {
+  if (days < 0) return 'Expired'
+  if (days < 30) return 'Act Now'
+  if (days <= 60) return 'Coming Up'
+  return 'Safe'
+}
