@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastProvider } from './components/Toast'
 import DashboardLayout from './components/DashboardLayout'
 import Landing from './pages/Landing'
@@ -9,6 +9,7 @@ import ContractDetail from './pages/ContractDetail'
 import Upload from './pages/Upload'
 import Alerts from './pages/Alerts'
 import Settings from './pages/Settings'
+import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
@@ -29,8 +30,8 @@ export default function App() {
             <Route path="/settings" element={<Settings />} />
           </Route>
 
-          {/* Catch all */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* 404 - catch all unmatched routes */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </ToastProvider>
