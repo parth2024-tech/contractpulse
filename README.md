@@ -1,6 +1,29 @@
 # ContractPulse
 
+<p align="left">
+  <img src="https://img.shields.io/github/actions/workflow/status/parth2024-tech/contractpulse/ci.yml?branch=main&label=CI&style=flat-square" alt="CI Status" />
+  <img src="https://img.shields.io/github/v/release/parth2024-tech/contractpulse?style=flat-square&color=blue" alt="Release" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" />
+</p>
+
 **ContractPulse** is an AI-powered contract management dashboard that helps teams track vendor contracts, renewal deadlines, and auto-renewal risks — all in one place.
+
+---
+
+### Architecture & Pipeline Flow
+
+```mermaid
+flowchart LR
+    A["Contract Ingestion<br/>(PDF / DOCX Upload)"] --> B["Extraction & Terms Normalizer"]
+    B --> C["Contract Vault<br/>(Terms, Notice Periods, SLA)"]
+    C --> D["Spend & Risk Aggregator"]
+    C --> E["Renewal Horizon Monitor<br/>(30 / 60 / 90 Days)"]
+    E --> F["Alert & Dispatcher Service"]
+
+    classDef default fill:#161b22,stroke:#30363d,stroke-width:1px,color:#c9d1d9;
+    classDef core fill:#0d1117,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
+    class C core;
+```
 
 ---
 
